@@ -1,7 +1,7 @@
 {
   "name": "portfolio5",
-  "version": "0.0.0",
   "private": true,
+  "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,10 +9,10 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "vite": "^8.0.10"
+    "vite": "^4.4.5"
   },
   "dependencies": {
-    "gsap": "^3.15.0",
-    "lucide": "^1.14.0"
+    "gsap": "^3.12.2",
+    "lucide": "^0.284.0"
   }
 }
