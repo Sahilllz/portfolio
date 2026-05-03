@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sahil Singone | Frontend Developer</title>
+    <meta name="description" content="Sahil Singone - Frontend Developer crafting high-performance and visually refined web experiences. Focused on building fast, interactive, and user-centric applications.">
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+</head>
+<body>
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+    <div class="grain"></div>
+
+    <div class="glow-bg">
+        <div class="glow-circle glow-1"></div>
+        <div class="glow-circle glow-2"></div>
+    </div>
+
+    <nav>
+        <div class="container">
+            <a href="#" class="logo">SAHIL</a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <!-- HERO SECTION -->
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="profile-container">
+                        <img src="/images/profile.png" alt="Sahil Singone" class="profile-img">
+                    </div>
+                    <h2>Sahil Singone</h2>
+                    <h1>Frontend Developer crafting high-performance and <span class="logo">visually refined</span> web experiences</h1>
+                    <p>Focused on building fast, interactive, and user-centric applications.</p>
+                    <div class="cta-group">
+                        <a href="#projects" class="btn btn-primary">View Projects</a>
+                        <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <div class="mouse">
+                    <div class="wheel"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section id="about" class="container">
+            <div class="about-grid">
+                <div class="about-image-wrapper glass-card">
+                    <img src="/images/profile.png" alt="Sahil Singone" style="filter: grayscale(0.5) contrast(1.1);">
+                </div>
+                <div class="about-content">
+                    <h3>About Me</h3>
+                    <p class="glass-card">I build modern web applications with a focus on performance, clean UI, and real-time interactivity. I enjoy turning ideas into fast, functional, and visually engaging products.</p>
+                    
+                    <div class="highlights">
+                        <div class="highlight-item">
+                            <div class="highlight-icon" id="icon-focus"></div>
+                            <div>
+                                <strong>Focus</strong>
+                                <p>Frontend Development</p>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <div class="highlight-icon" id="icon-interest"></div>
+                            <div>
+                                <strong>Interest</strong>
+                                <p>Performance Optimization, UI/UX</p>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <div class="highlight-icon" id="icon-strength"></div>
+                            <div>
+                                <strong>Strength</strong>
+                                <p>Clean and scalable architecture</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILLS SECTION -->
+        <section id="skills" class="container">
+            <h2 style="text-align: center; font-size: 3rem; margin-bottom: 3rem;">Technical Arsenal</h2>
+            <div class="skills-grid">
+                <div class="glass-card skill-badge">
+                    <div id="icon-js" class="skill-icon"></div>
+                    <strong>JavaScript</strong>
+                </div>
+                <div class="glass-card skill-badge">
+                    <div id="icon-react" class="skill-icon"></div>
+                    <strong>React</strong>
+                </div>
+                <div class="glass-card skill-badge">
+                    <div id="icon-html" class="skill-icon"></div>
+                    <strong>HTML</strong>
+                </div>
+                <div class="glass-card skill-badge">
+                    <div id="icon-css" class="skill-icon"></div>
+                    <strong>CSS</strong>
+                </div>
+                <div class="glass-card skill-badge">
+                    <div id="icon-git" class="skill-icon"></div>
+                    <strong>Git & GitHub</strong>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS SECTION -->
+        <section id="projects" class="container">
+            <h2 style="text-align: center; font-size: 3rem; margin-bottom: 3rem;">Featured Projects</h2>
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="glass-card project-card">
+                    <div class="project-image">
+                        <img src="/images/typelabs.png" alt="TypeLabs">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-tag">TypeLabs</span>
+                        <h3>Real-time typing engine with performance analytics</h3>
+                        <p>A fast and interactive typing platform focused on speed, accuracy tracking, and smooth user experience.</p>
+                        <a href="https://typelabs-nine.vercel.app/" target="_blank" class="btn btn-primary">Live Demo</a>
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <div class="glass-card project-card">
+                    <div class="project-image">
+                        <img src="/images/gitcommitter.png" alt="GitCommitter">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-tag">GitCommitter</span>
+                        <h3>Automated commit management and workflow optimization tool</h3>
+                        <p>A tool designed to streamline Git workflows and improve commit efficiency.</p>
+                        <a href="#" class="btn btn-secondary">In Development</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact" class="container contact-section">
+            <div class="glass-card contact-content">
+                <h2 style="font-size: 3rem; margin-bottom: 1.5rem;">Get in Touch</h2>
+                <p style="font-size: 1.25rem; color: var(--text-dim); margin-bottom: 3rem;">Have an idea or opportunity? Let’s build something impactful.</p>
+                
+                <div class="social-links">
+                    <a href="https://github.com/Sahilllz" target="_blank" class="btn btn-secondary">GitHub</a>
+                    <a href="https://www.linkedin.com/in/sahil-singone" target="_blank" class="btn btn-secondary">LinkedIn</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Sahil Singone. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script type="module" src="/main.js"></script>
+</body>
+</html>
