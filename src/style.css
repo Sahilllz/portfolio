@@ -203,9 +203,10 @@ nav .container {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 20%;
+  object-position: center 5%;
   border-radius: inherit;
   background: var(--bg-color);
+  transform: scale(1.05);
 }
 
 @keyframes morph {
@@ -273,7 +274,7 @@ nav .container {
   width: 100%;
   aspect-ratio: 4/5;
   object-fit: cover;
-  object-position: center 20%;
+  object-position: center 15%;
   border-radius: 16px;
   display: block;
 }
