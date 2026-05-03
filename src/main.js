@@ -18,7 +18,8 @@ import {
   Linkedin,
   Github,
   Zap,
-  Layers
+  Layers,
+  Instagram
 } from 'lucide'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -42,7 +43,8 @@ const setupIcons = () => {
             Linkedin,
             Github,
             Zap,
-            Layers
+            Layers,
+            Instagram
         }
     });
 
@@ -65,6 +67,7 @@ const setupIcons = () => {
         'icon-case': '<i data-lucide="chevron-right" size="18"></i>',
         'contact-mail': '<i data-lucide="mail"></i>',
         'contact-linkedin': '<i data-lucide="linkedin"></i>',
+        'contact-instagram': '<i data-lucide="instagram"></i>',
         'contact-github': '<i data-lucide="github"></i>'
     };
 
