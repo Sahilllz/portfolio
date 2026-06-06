@@ -132,6 +132,7 @@ nav .container {
   height: 45px;
   width: auto;
   border-radius: 8px;
+  mix-blend-mode: screen;
   transition: transform 0.3s ease, filter 0.3s ease;
   filter: drop-shadow(0 0 10px rgba(0, 242, 255, 0.3));
 }
