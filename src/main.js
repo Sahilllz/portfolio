@@ -19,7 +19,10 @@ import {
   Github,
   Zap,
   Layers,
-  Instagram
+  Instagram,
+  Search,
+  PenTool,
+  Network
 } from 'lucide'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -44,7 +47,10 @@ const setupIcons = () => {
             Github,
             Zap,
             Layers,
-            Instagram
+            Instagram,
+            Search,
+            PenTool,
+            Network
         }
     });
 
@@ -53,16 +59,6 @@ const setupIcons = () => {
         'icon-design': '<i data-lucide="monitor"></i>',
         'icon-ai': '<i data-lucide="cpu"></i>',
         'icon-clean': '<i data-lucide="code"></i>',
-        'skill-html': '<i data-lucide="file-code" size="40"></i>',
-        'skill-css': '<i data-lucide="layers" size="40"></i>',
-        'skill-js': '<i data-lucide="zap" size="40"></i>',
-        'skill-react': '<i data-lucide="globe" size="40"></i>',
-        'skill-node': '<i data-lucide="database" size="40"></i>',
-        'skill-python': '<i data-lucide="terminal" size="40"></i>',
-        'skill-ml': '<i data-lucide="cpu" size="40"></i>',
-        'skill-git': '<i data-lucide="git-branch" size="40"></i>',
-        'skill-figma': '<i data-lucide="figma" size="40"></i>',
-        'skill-vscode': '<i data-lucide="code" size="40"></i>',
         'icon-external': '<i data-lucide="external-link" size="18"></i>',
         'icon-case': '<i data-lucide="chevron-right" size="18"></i>'
     };
@@ -123,11 +119,6 @@ const setupAnimations = () => {
             }
         });
     });
-
-    // Skill Card Hover Scale
-    gsap.utils.toArray('.skill-card').forEach(card => {
-        card.addEventListener('mouseenter', () => gsap.to(card, { scale: 1.05, duration: 0.3 }));
-        card.addEventListener('mouseleave', () => gsap.to(card, { scale: 1, duration: 0.3 }));
     });
 }
 
