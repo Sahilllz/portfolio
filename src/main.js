@@ -22,7 +22,8 @@ import {
   Instagram,
   Search,
   PenTool,
-  Network
+  Network,
+  Bot
 } from 'lucide'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -50,7 +51,8 @@ const setupIcons = () => {
             Instagram,
             Search,
             PenTool,
-            Network
+            Network,
+            Bot
         }
     });
 
