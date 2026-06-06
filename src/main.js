@@ -119,7 +119,6 @@ const setupAnimations = () => {
             }
         });
     });
-    });
 }
 
 // Initialize
