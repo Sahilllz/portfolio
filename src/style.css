@@ -512,15 +512,19 @@ nav .container {
   color: var(--text-color);
 }
 
-.contact-item .icon {
-  width: 50px;
-  height: 50px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--accent-primary);
+.contact-logo {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.contact-item:hover .contact-logo {
+  transform: scale(1.15) rotate(-5deg);
+}
+
+.contact-item img[alt="GitHub"] {
+  filter: invert(1);
 }
 
 /* Footer */

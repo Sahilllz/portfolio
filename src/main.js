@@ -64,11 +64,7 @@ const setupIcons = () => {
         'skill-figma': '<i data-lucide="figma" size="40"></i>',
         'skill-vscode': '<i data-lucide="code" size="40"></i>',
         'icon-external': '<i data-lucide="external-link" size="18"></i>',
-        'icon-case': '<i data-lucide="chevron-right" size="18"></i>',
-        'contact-mail': '<i data-lucide="mail"></i>',
-        'contact-linkedin': '<i data-lucide="linkedin"></i>',
-        'contact-instagram': '<i data-lucide="instagram"></i>',
-        'contact-github': '<i data-lucide="github"></i>'
+        'icon-case': '<i data-lucide="chevron-right" size="18"></i>'
     };
 
     for (const [id, html] of Object.entries(icons)) {
