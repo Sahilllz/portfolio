@@ -95,6 +95,10 @@ nav.scrolled {
   height: 70px;
 }
 
+nav.nav-hidden {
+  transform: translateY(-100%);
+}
+
 nav .container {
   width: 100%;
   display: flex;

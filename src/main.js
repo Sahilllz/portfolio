@@ -74,12 +74,25 @@ const setupIcons = () => {
 // Navbar Scroll Effect
 const setupNavbar = () => {
     const nav = document.getElementById('navbar');
+    let lastScroll = 0;
+    
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
+        const currentScroll = window.scrollY;
+        
+        if (currentScroll > 50) {
             nav.classList.add('scrolled');
         } else {
             nav.classList.remove('scrolled');
         }
+        
+        // Hide on scroll down, show on scroll up
+        if (currentScroll > lastScroll && currentScroll > 80) {
+            nav.classList.add('nav-hidden');
+        } else {
+            nav.classList.remove('nav-hidden');
+        }
+        
+        lastScroll = currentScroll;
     });
 }
 
