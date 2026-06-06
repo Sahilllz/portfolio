@@ -56,11 +56,8 @@ const setupIcons = () => {
         }
     });
 
-    // Highlights
+    // Project Icons
     const icons = {
-        'icon-design': '<i data-lucide="monitor"></i>',
-        'icon-ai': '<i data-lucide="cpu"></i>',
-        'icon-clean': '<i data-lucide="code"></i>',
         'icon-external': '<i data-lucide="external-link" size="18"></i>',
         'icon-case': '<i data-lucide="chevron-right" size="18"></i>'
     };
