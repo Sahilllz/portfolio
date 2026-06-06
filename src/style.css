@@ -86,16 +86,14 @@ nav {
   align-items: center;
   z-index: 1000;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.4s ease, border-color 0.4s ease, height 0.4s ease;
-  background: rgba(5, 5, 5, 0.7);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  background: var(--bg-color);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 nav.scrolled {
-  background: rgba(5, 5, 10, 0.9);
+  background: #000000;
   border-bottom: 1px solid rgba(0, 242, 255, 0.15);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
   height: 70px;
 }
 
