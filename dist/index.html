@@ -8,15 +8,38 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <script type="module" crossorigin src="/assets/index-ff24d146.js"></script>
-  <link rel="stylesheet" href="/assets/index-a7ad957b.css">
+  <script type="module" crossorigin src="/assets/index-262cb95b.js"></script>
+  <link rel="stylesheet" href="/assets/index-54aa19f2.css">
 </head>
 <body>
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress-container">
+        <div class="scroll-progress-bar" id="scroll-progress"></div>
+    </div>
+
+    <!-- Preloader Screen -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo">
+                <span class="logo-text">Sahil</span><span class="logo-dot">.</span>
+            </div>
+            <div class="preloader-bar">
+                <div class="preloader-progress" id="preloader-progress"></div>
+            </div>
+            <div class="preloader-percent" id="preloader-percent">0%</div>
+        </div>
+    </div>
+
     <!-- Background Canvas Effects & Blobs -->
     <div class="noise-overlay"></div>
     <div class="glow-blob blob-1"></div>
     <div class="glow-blob blob-2"></div>
     <div class="glow-blob blob-3"></div>
+
+    <!-- Custom Cursor & Spotlight elements -->
+    <div class="cursor-spotlight" id="cursor-spotlight"></div>
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
 
     <!-- Floating Pill Navigation -->
     <header class="nav-wrapper">
@@ -47,18 +70,87 @@
             <div class="container">
                 <div class="hero-grid">
                     <div class="hero-content">
-                        <h3>Software Developer | UI/UX Designer</h3>
+                        <h3>Building Products, Systems, & AI Experiences</h3>
                         <h2>Hi, I'm <span class="logo">Sahil</span></h2>
                         <p>I build high-performance web applications and visually refined experiences with a focus on clean architecture and modern technology.</p>
+                        
+                        <!-- Hero Telemetry & Status Badges -->
+                        <div class="hero-meta">
+                            <div class="meta-item availability">
+                                <span class="status-dot pulsed"></span>
+                                <span class="meta-label">Available for Q3 2026</span>
+                            </div>
+                            <div class="meta-item focus">
+                                <i data-lucide="bot" class="meta-icon"></i>
+                                <span class="meta-label">Focus: AI Agents & Systems</span>
+                            </div>
+                        </div>
+
                         <div class="btn-group">
                             <a href="#projects" class="btn btn-primary">View Projects</a>
                             <a href="#contact" class="btn btn-outline">Contact Me</a>
+                        </div>
+
+                        <!-- Animated Stats Counters -->
+                        <div class="hero-stats">
+                            <div class="stat-card">
+                                <div class="stat-num" data-target="5">0</div>
+                                <div class="stat-label">Years Building</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-num" data-target="12">0</div>
+                                <div class="stat-label">Shipped Projects</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-num" data-target="18">0</div>
+                                <div class="stat-label">Tech Mastered</div>
+                            </div>
                         </div>
                     </div>
                     <div class="hero-image-container">
                         <div class="hero-image">
                             <img src="/images/profile_hero.jpg" alt="Sahil Singone">
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BUILDER'S PHILOSOPHY SECTION -->
+        <section id="philosophy" class="philosophy-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Core Values</span>
+                    <h2 class="section-title">Builder's Philosophy</h2>
+                    <p class="section-desc">My fundamental principles for creating software, systems, and digital leverage.</p>
+                </div>
+                <div class="philosophy-grid">
+                    <!-- Value 1 -->
+                    <div class="bento-card philosophy-card spotlight-card">
+                        <div class="philosophy-icon"><i data-lucide="cpu"></i></div>
+                        <h4>Systems Over Code</h4>
+                        <p>I don't just write scripts; I design self-sustaining systems. Every piece of logic must contribute to user utility, lower operational costs, and build long-term value.</p>
+                    </div>
+
+                    <!-- Value 2 -->
+                    <div class="bento-card philosophy-card spotlight-card">
+                        <div class="philosophy-icon"><i data-lucide="zap"></i></div>
+                        <h4>Velocity as a Metric</h4>
+                        <p>A perfect product shipped too late is a failure. I prioritize getting raw, high-performance MVPs into the wild, gathering real feedback, and iterating with speed.</p>
+                    </div>
+
+                    <!-- Value 3 -->
+                    <div class="bento-card philosophy-card spotlight-card">
+                        <div class="philosophy-icon"><i data-lucide="bot"></i></div>
+                        <h4>AI-Assisted Leverage</h4>
+                        <p>AI isn't a replacement for engineering; it's a force multiplier. I design custom pipelines and autonomous agent nodes that offload back-office labor, letting humans think at a higher level.</p>
+                    </div>
+
+                    <!-- Value 4 -->
+                    <div class="bento-card philosophy-card spotlight-card">
+                        <div class="philosophy-icon"><i data-lucide="eye"></i></div>
+                        <h4>Clean Visual Aesthetics</h4>
+                        <p>Code speed is useless if the interface is frustrating. I fuse system architecture with premium dark visuals and micro-interactions, ensuring the user experience feels immediate, premium, and alive.</p>
                     </div>
                 </div>
             </div>
@@ -158,6 +250,109 @@
                                     <i data-lucide="github" class="link-icon-left"></i>
                                     <span>View Source</span>
                                 </a>
+                                <button class="btn btn-text-premium project-diagnostics-btn" data-target="diagnostics-typelabs">
+                                    <i data-lucide="activity" class="link-icon-left"></i>
+                                    <span>Diagnostics & Tech Spec</span>
+                                    <i data-lucide="chevron-down" class="toggle-icon"></i>
+                                </button>
+                            </div>
+
+                            <!-- Diagnostics Panel -->
+                            <div class="diagnostics-panel" id="diagnostics-typelabs">
+                                <div class="diagnostics-nav">
+                                    <button class="diag-tab-btn active" data-tab="arch-typelabs">Architecture</button>
+                                    <button class="diag-tab-btn" data-tab="timeline-typelabs">Timeline & Challenges</button>
+                                    <button class="diag-tab-btn" data-tab="metrics-typelabs">Performance Metrics</button>
+                                </div>
+                                <div class="diagnostics-content">
+                                    <!-- Tab 1: Architecture -->
+                                    <div class="diag-tab-pane active" id="arch-typelabs">
+                                        <div class="architecture-diagram">
+                                            <!-- SVG Architecture Diagram -->
+                                            <svg viewBox="0 0 600 220" fill="none" class="arch-svg">
+                                                <rect x="20" y="80" width="120" height="60" rx="10" fill="rgba(255,255,255,0.02)" stroke="var(--accent-cyan)" stroke-width="1.5"/>
+                                                <text x="80" y="115" fill="#fff" font-size="12" text-anchor="middle" font-family="var(--font-body)">Keypress Listener</text>
+
+                                                <path d="M140 110 H180" stroke="var(--accent-purple)" stroke-width="2" stroke-dasharray="4" class="flowing-line"/>
+
+                                                <rect x="180" y="80" width="140" height="60" rx="10" fill="rgba(255,255,255,0.02)" stroke="var(--accent-purple)" stroke-width="1.5"/>
+                                                <text x="250" y="110" fill="#fff" font-size="12" text-anchor="middle" font-family="var(--font-body)">Isolated React State</text>
+                                                <text x="250" y="128" fill="var(--text-dim)" font-size="10" text-anchor="middle" font-family="var(--font-body)">(Latency Telemetry)</text>
+
+                                                <path d="M320 110 H360" stroke="var(--accent-cyan)" stroke-width="2" stroke-dasharray="4" class="flowing-line"/>
+
+                                                <rect x="360" y="40" width="140" height="60" rx="10" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+                                                <text x="430" y="75" fill="#fff" font-size="11" text-anchor="middle" font-family="var(--font-body)">Telemetry Analytics</text>
+
+                                                <rect x="360" y="140" width="140" height="60" rx="10" fill="rgba(255,255,255,0.02)" stroke="var(--accent-cyan)" stroke-width="1.5"/>
+                                                <text x="430" y="175" fill="#fff" font-size="11" text-anchor="middle" font-family="var(--font-body)">GSAP Engine</text>
+
+                                                <path d="M320 110 L360 70" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+                                                <path d="M320 110 L360 170" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+                                            </svg>
+                                            <p class="diagram-caption">Strict React state isolation prevents rendering delays, enabling sub-10ms keypress telemetry capture.</p>
+                                        </div>
+                                    </div>
+                                    <!-- Tab 2: Timeline & Challenges -->
+                                    <div class="diag-tab-pane" id="timeline-typelabs">
+                                        <div class="timeline-challenges-grid">
+                                            <div class="diag-timeline">
+                                                <div class="timeline-step">
+                                                    <span class="step-dot"></span>
+                                                    <span class="step-date">Week 1-2</span>
+                                                    <p class="step-desc">Telemetry engine construction & microsecond event hooking.</p>
+                                                </div>
+                                                <div class="timeline-step">
+                                                    <span class="step-dot"></span>
+                                                    <span class="step-date">Week 3</span>
+                                                    <p class="step-desc">Integration of hardware-accelerated GSAP rendering.</p>
+                                                </div>
+                                                <div class="timeline-step">
+                                                    <span class="step-dot"></span>
+                                                    <span class="step-date">Week 4</span>
+                                                    <p class="step-desc">Data visualizations for character latency completed.</p>
+                                                </div>
+                                            </div>
+                                            <div class="diag-challenges">
+                                                <div class="challenge-item">
+                                                    <h6>Challenge: React Render Lag</h6>
+                                                    <p>State updates on fast keypresses (>120 WPM) caused slight visual stutter in metric displays.</p>
+                                                    <p class="solution"><strong>Solution:</strong> Bypassed React state for typing log events, streaming key delta logs to a raw JS memory buffer and rendering via requestAnimationFrame.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Tab 3: Performance Metrics -->
+                                    <div class="diag-tab-pane" id="metrics-typelabs">
+                                        <div class="metrics-grid">
+                                            <div class="metric-progress-card">
+                                                <div class="progress-info">
+                                                    <span>Keystroke Telemetry Latency</span>
+                                                    <span class="progress-val">8ms (Max)</span>
+                                                </div>
+                                                <div class="progress-track"><div class="progress-fill" style="width: 95%;"></div></div>
+                                            </div>
+                                            <div class="metric-progress-card">
+                                                <div class="progress-info">
+                                                    <span>Render Refresh Rate</span>
+                                                    <span class="progress-val">60 fps (Solid)</span>
+                                                </div>
+                                                <div class="progress-track"><div class="progress-fill" style="width: 100%;"></div></div>
+                                            </div>
+                                            <div class="before-after-split">
+                                                <div class="before">
+                                                    <strong>Generic Typing Tests</strong>
+                                                    <span>Static text, block re-renders, generic stats</span>
+                                                </div>
+                                                <div class="divider"></div>
+                                                <div class="after">
+                                                    <strong>TypeLabs Engine</strong>
+                                                    <span>Keystroke heatmaps, fluid GSAP feedback</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -203,6 +398,198 @@
                                     <i data-lucide="github" class="link-icon-left"></i>
                                     <span>View Source</span>
                                 </a>
+                                <button class="btn btn-text-premium project-diagnostics-btn" data-target="diagnostics-gitcommitter">
+                                    <i data-lucide="activity" class="link-icon-left"></i>
+                                    <span>Diagnostics & Tech Spec</span>
+                                    <i data-lucide="chevron-down" class="toggle-icon"></i>
+                                </button>
+                            </div>
+
+                            <!-- Diagnostics Panel -->
+                            <div class="diagnostics-panel" id="diagnostics-gitcommitter">
+                                <div class="diagnostics-nav">
+                                    <button class="diag-tab-btn active" data-tab="arch-gitcommitter">Architecture</button>
+                                    <button class="diag-tab-btn" data-tab="timeline-gitcommitter">Timeline & Challenges</button>
+                                    <button class="diag-tab-btn" data-tab="metrics-gitcommitter">Performance Metrics</button>
+                                </div>
+                                <div class="diagnostics-content">
+                                    <!-- Tab 1: Architecture -->
+                                    <div class="diag-tab-pane active" id="arch-gitcommitter">
+                                        <div class="architecture-diagram">
+                                            <!-- SVG Architecture Diagram -->
+                                            <svg viewBox="0 0 600 220" fill="none" class="arch-svg">
+                                                <rect x="20" y="80" width="120" height="60" rx="10" fill="rgba(255,255,255,0.02)" stroke="var(--accent-cyan)" stroke-width="1.5"/>
+                                                <text x="80" y="115" fill="#fff" font-size="12" text-anchor="middle" font-family="var(--font-body)">CLI CLI / Node</text>
+
+                                                <path d="M140 110 H180" stroke="var(--accent-purple)" stroke-width="2" stroke-dasharray="4" class="flowing-line"/>
+
+                                                <rect x="180" y="80" width="140" height="60" rx="10" fill="rgba(255,255,255,0.02)" stroke="var(--accent-purple)" stroke-width="1.5"/>
+                                                <text x="250" y="110" fill="#fff" font-size="12" text-anchor="middle" font-family="var(--font-body)">Diff Parser</text>
+                                                <text x="250" y="128" fill="var(--text-dim)" font-size="10" text-anchor="middle" font-family="var(--font-body)">(Conventional Logic)</text>
+
+                                                <path d="M320 110 H360" stroke="var(--accent-cyan)" stroke-width="2" stroke-dasharray="4" class="flowing-line"/>
+
+                                                <rect x="360" y="80" width="150" height="60" rx="10" fill="rgba(255,255,255,0.02)" stroke="var(--accent-cyan)" stroke-width="1.5"/>
+                                                <text x="435" y="110" fill="#fff" font-size="12" text-anchor="middle" font-family="var(--font-body)">Local Git Hook</text>
+                                                <text x="435" y="128" fill="var(--text-dim)" font-size="10" text-anchor="middle" font-family="var(--font-body)">(Commit Validation)</text>
+                                            </svg>
+                                            <p class="diagram-caption">Seamless node wrapper intercepts commit actions, parsing diffs instantly to generate standardized logs.</p>
+                                        </div>
+                                    </div>
+                                    <!-- Tab 2: Timeline & Challenges -->
+                                    <div class="diag-tab-pane" id="timeline-gitcommitter">
+                                        <div class="timeline-challenges-grid">
+                                            <div class="diag-timeline">
+                                                <div class="timeline-step">
+                                                    <span class="step-dot"></span>
+                                                    <span class="step-date">Week 1</span>
+                                                    <p class="step-desc">CLI core command harness & Git configuration setup.</p>
+                                                </div>
+                                                <div class="timeline-step">
+                                                    <span class="step-dot"></span>
+                                                    <span class="step-date">Week 2</span>
+                                                    <p class="step-desc">Hook shell runner script & automated parser implementation.</p>
+                                                </div>
+                                            </div>
+                                            <div class="diag-challenges">
+                                                <div class="challenge-item">
+                                                    <h6>Challenge: Hook Bypass Vectors</h6>
+                                                    <p>Git standard hooks bypass config layers if developer invokes commands with specific override flags, risking formatting errors.</p>
+                                                    <p class="solution"><strong>Solution:</strong> Hooked deep into git-core config, auto-routing execution pipelines through custom shell script overlays to enforce compliance.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Tab 3: Performance Metrics -->
+                                    <div class="diag-tab-pane" id="metrics-gitcommitter">
+                                        <div class="metrics-grid">
+                                            <div class="metric-progress-card">
+                                                <div class="progress-info">
+                                                    <span>Commit Formatting Rate</span>
+                                                    <span class="progress-val">100% Accuracy</span>
+                                                </div>
+                                                <div class="progress-track"><div class="progress-fill" style="width: 100%;"></div></div>
+                                            </div>
+                                            <div class="metric-progress-card">
+                                                <div class="progress-info">
+                                                    <span>Commit Pipeline Speed Improvement</span>
+                                                    <span class="progress-val">40% Saved Time</span>
+                                                </div>
+                                                <div class="progress-track"><div class="progress-fill" style="width: 80%;"></div></div>
+                                            </div>
+                                            <div class="before-after-split">
+                                                <div class="before">
+                                                    <strong>Manual Typing</strong>
+                                                    <span>Prone to conventional commit spelling and type mismatches</span>
+                                                </div>
+                                                <div class="divider"></div>
+                                                <div class="after">
+                                                    <strong>GitCommitter CLI</strong>
+                                                    <span>Interactive wizard prompts, strict lint, auto-commit</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TYPELABS CENTERPIECE SHOWCASE -->
+        <section id="typelabs-centerpiece" class="typelabs-centerpiece-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Featured centerpiece</span>
+                    <h2 class="section-title">TypeLabs Showcase</h2>
+                    <p class="section-desc">Test the typing core telemetry engine live. Measure your millisecond-accurate keystroke latency.</p>
+                </div>
+                
+                <div class="centerpiece-grid">
+                    <!-- Left: Technical Specs & Product Story -->
+                    <div class="centerpiece-info">
+                        <div class="glass-panel info-card">
+                            <h3>High-Fidelity Telemetry</h3>
+                            <p>TypeLabs was engineered to demonstrate microsecond-accurate keyboard event recording and rendering. It parses keystrokes inside an isolated thread and outputs detailed performance statistics.</p>
+                            
+                            <div class="tech-spec-list">
+                                <div class="spec-item">
+                                    <div class="spec-icon"><i data-lucide="zap"></i></div>
+                                    <div class="spec-text">
+                                        <h6>Isolated State Loop</h6>
+                                        <p>Prevents render thrashing and allows typing speeds >200 WPM without key drops.</p>
+                                    </div>
+                                </div>
+                                <div class="spec-item">
+                                    <div class="spec-icon"><i data-lucide="bar-chart-2"></i></div>
+                                    <div class="spec-text">
+                                        <h6>Micro-telemetry Engine</h6>
+                                        <p>Captures keystroke flight time, release time, and overlap delay in milliseconds.</p>
+                                    </div>
+                                </div>
+                                <div class="spec-item">
+                                    <div class="spec-icon"><i data-lucide="activity"></i></div>
+                                    <div class="spec-text">
+                                        <h6>GSAP Dynamic Rendering</h6>
+                                        <p>Hardware-accelerated interface reactions that feed active visual rewards to typists.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Typing Sandbox Widget -->
+                    <div class="centerpiece-widget">
+                        <div class="glass-panel sandbox-card">
+                            <div class="sandbox-header">
+                                <div class="sandbox-title">
+                                    <span class="status-dot pulsed"></span>
+                                    <span>TypeLabs Telemetry Sandbox</span>
+                                </div>
+                                <button class="btn-reset-typing" id="btn-reset-typing">
+                                    <i data-lucide="rotate-ccw"></i>
+                                </button>
+                            </div>
+                            
+                            <!-- Typing Sandbox Area -->
+                            <div class="typing-sandbox-wrapper" id="typing-sandbox-wrapper">
+                                <div class="typing-text-display" id="typing-text-display">
+                                    <!-- Dynamic character spans will load here -->
+                                </div>
+                                <input type="text" id="typing-input" class="hidden-typing-input" autocomplete="off">
+                                <div class="typing-focus-prompt" id="typing-focus-prompt">
+                                    <i data-lucide="keyboard"></i>
+                                    <span>Click to focus and start typing</span>
+                                </div>
+                            </div>
+
+                            <!-- Live Telemetry Dashboard -->
+                            <div class="telemetry-dashboard">
+                                <div class="telemetry-metric">
+                                    <span class="val" id="telemetry-wpm">0</span>
+                                    <span class="lbl">WPM</span>
+                                </div>
+                                <div class="telemetry-metric">
+                                    <span class="val" id="telemetry-accuracy">100%</span>
+                                    <span class="lbl">Accuracy</span>
+                                </div>
+                                <div class="telemetry-metric">
+                                    <span class="val" id="telemetry-latency">--ms</span>
+                                    <span class="lbl">Avg Latency</span>
+                                </div>
+                            </div>
+
+                            <!-- Results Summary & Latency Heatmap (Hidden Initially) -->
+                            <div class="typing-results-panel" id="typing-results-panel">
+                                <h5>Diagnostics Report</h5>
+                                <div class="heatmap-container">
+                                    <h6>Keystroke Latency Heatmap</h6>
+                                    <div class="latency-heatmap" id="latency-heatmap">
+                                        <!-- Heatmap grid will populate here -->
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -226,23 +613,23 @@
                             <h3>Web Development</h3>
                         </div>
                         <div class="skill-tags">
-                            <div class="skill-tag">
+                            <div class="skill-tag" data-proficiency="95%" data-timeline="4+ Years" data-projects="TypeLabs">
                                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" alt="React">
                                 <span>React</span>
                             </div>
-                            <div class="skill-tag">
+                            <div class="skill-tag" data-proficiency="85%" data-timeline="3+ Years" data-projects="TypeLabs,GitCommitter">
                                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" alt="Node.js">
                                 <span>Node.js</span>
                             </div>
-                            <div class="skill-tag">
+                            <div class="skill-tag" data-proficiency="95%" data-timeline="5+ Years" data-projects="TypeLabs,GitCommitter">
                                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" alt="JavaScript">
                                 <span>JavaScript</span>
                             </div>
-                            <div class="skill-tag">
+                            <div class="skill-tag" data-proficiency="95%" data-timeline="5+ Years" data-projects="TypeLabs">
                                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" alt="HTML5">
                                 <span>HTML5</span>
                             </div>
-                            <div class="skill-tag">
+                            <div class="skill-tag" data-proficiency="90%" data-timeline="5+ Years" data-projects="TypeLabs">
                                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" alt="CSS3">
                                 <span>CSS3</span>
                             </div>
@@ -256,15 +643,15 @@
                             <h3>Core & AI/ML</h3>
                         </div>
                         <div class="skill-tags">
-                            <div class="skill-tag">
+                            <div class="skill-tag" data-proficiency="75%" data-timeline="2+ Years" data-projects="">
                                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/c/c-original.svg" alt="C">
                                 <span>C / C++</span>
                             </div>
-                            <div class="skill-tag">
+                            <div class="skill-tag" data-proficiency="80%" data-timeline="3+ Years" data-projects="">
                                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python">
                                 <span>Python</span>
                             </div>
-                            <div class="skill-tag">
+                            <div class="skill-tag" data-proficiency="70%" data-timeline="1+ Year" data-projects="">
                                 <div class="generic-icon"><i data-lucide="network"></i></div>
                                 <span>Machine Learning</span>
                             </div>
@@ -278,11 +665,11 @@
                             <h3>Design & SEO</h3>
                         </div>
                         <div class="skill-tags">
-                            <div class="skill-tag">
+                            <div class="skill-tag" data-proficiency="90%" data-timeline="4+ Years" data-projects="TypeLabs">
                                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg" alt="Figma">
                                 <span>UI/UX Designing</span>
                             </div>
-                            <div class="skill-tag">
+                            <div class="skill-tag" data-proficiency="75%" data-timeline="2+ Years" data-projects="">
                                 <div class="generic-icon"><i data-lucide="search"></i></div>
                                 <span>SEO</span>
                             </div>
@@ -296,15 +683,15 @@
                             <h3>Tools & Environment</h3>
                         </div>
                         <div class="skill-tags">
-                            <div class="skill-tag">
+                            <div class="skill-tag" data-proficiency="90%" data-timeline="4+ Years" data-projects="GitCommitter">
                                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" alt="Git">
                                 <span>Git & GitHub</span>
                             </div>
-                            <div class="skill-tag">
+                            <div class="skill-tag" data-proficiency="95%" data-timeline="5+ Years" data-projects="">
                                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg" alt="VS Code">
                                 <span>VS Code</span>
                             </div>
-                            <div class="skill-tag">
+                            <div class="skill-tag" data-proficiency="99%" data-timeline="1+ Year" data-projects="">
                                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 24px; height: 24px; filter: drop-shadow(0 0 5px rgba(0, 242, 255, 0.5));">
                                     <defs>
                                         <linearGradient id="ag-grad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -312,11 +699,41 @@
                                             <stop offset="100%" stop-color="#7000ff" />
                                         </linearGradient>
                                     </defs>
-                                    <!-- A stylized abstract 'A' defying gravity -->
                                     <path d="M12 2L2 22h4.5l5.5-11 5.5 11H22L12 2z" fill="url(#ag-grad)"/>
                                     <circle cx="12" cy="14" r="3" fill="url(#ag-grad)"/>
                                 </svg>
                                 <span>Antigravity</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Skill Details Panel -->
+                <div class="skill-details-panel spotlight-card" id="skill-details-panel">
+                    <div class="panel-placeholder" id="skill-panel-placeholder">
+                        <i data-lucide="cpu" class="placeholder-icon"></i>
+                        <p>Click any skill tag to run stack diagnostics...</p>
+                    </div>
+                    <div class="panel-data" id="skill-panel-data" style="display: none;">
+                        <div class="panel-header">
+                            <h4 id="skill-detail-name">React</h4>
+                            <span class="skill-detail-timeline" id="skill-detail-timeline">4+ Years</span>
+                        </div>
+                        <div class="panel-body">
+                            <div class="proficiency-bar-wrapper">
+                                <div class="bar-header">
+                                    <span>Proficiency Level</span>
+                                    <span id="skill-detail-percent">95%</span>
+                                </div>
+                                <div class="bar-track">
+                                    <div class="bar-fill" id="skill-detail-fill"></div>
+                                </div>
+                            </div>
+                            <div class="associated-projects">
+                                <h6>Associated Builds</h6>
+                                <div class="project-tags-list" id="skill-detail-projects">
+                                    <!-- Dynamic project links loaded via JS -->
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -328,58 +745,125 @@
         <section id="exploring" class="exploring-section">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-tag">Interests</span>
+                    <span class="section-tag">Interests & Direction</span>
                     <h2 class="section-title">What I'm Exploring</h2>
                     <p class="section-desc">Keeping a pulse on emerging tech, frameworks, and patterns that will define the future of business.</p>
+                    
+                    <!-- View Toggle -->
+                    <div class="explore-toggle-container">
+                        <button class="explore-toggle-btn active" id="btn-explore-grid">Research Areas</button>
+                        <button class="explore-toggle-btn" id="btn-explore-roadmap">Learning Roadmap</button>
+                    </div>
                 </div>
 
-                <div class="exploring-bento-grid">
-                    <!-- Explore 1: AI Agents -->
-                    <div class="bento-card explore-card spotlight-card">
-                        <div class="explore-glow"></div>
-                        <div class="explore-icon-box"><i data-lucide="bot"></i></div>
-                        <h4>AI Agents & RAG</h4>
-                        <p>Constructing multi-agent nodes that collaborate using custom databases to autonomously solve support, research, and analysis workflows.</p>
+                <div class="explore-views-wrapper">
+                    <!-- View 1: Bento Grid (Default) -->
+                    <div class="exploring-bento-grid active" id="explore-view-grid">
+                        <!-- Explore 1: AI Agents -->
+                        <div class="bento-card explore-card spotlight-card">
+                            <div class="explore-glow"></div>
+                            <div class="explore-icon-box"><i data-lucide="bot"></i></div>
+                            <h4>AI Agents & RAG</h4>
+                            <p>Constructing multi-agent nodes that collaborate using custom databases to autonomously solve support, research, and analysis workflows.</p>
+                        </div>
+
+                        <!-- Explore 2: SaaS Platforms -->
+                        <div class="bento-card explore-card spotlight-card">
+                            <div class="explore-glow"></div>
+                            <div class="explore-icon-box"><i data-lucide="layers"></i></div>
+                            <h4>Scalable SaaS</h4>
+                            <p>Studying multi-tenant database designs, dynamic billing architectures, and high-conversion landing page heuristics for digital products.</p>
+                        </div>
+
+                        <!-- Explore 3: Automation Loops -->
+                        <div class="bento-card explore-card spotlight-card">
+                            <div class="explore-glow"></div>
+                            <div class="explore-icon-box"><i data-lucide="zap"></i></div>
+                            <h4>No-Code & Custom API Loops</h4>
+                            <p>Synthesizing webhooks, triggers, and automated logic bridges to bypass manual back-office tasks and save human hours.</p>
+                        </div>
+
+                        <!-- Explore 4: Product Design -->
+                        <div class="bento-card explore-card spotlight-card">
+                            <div class="explore-glow"></div>
+                            <div class="explore-icon-box"><i data-lucide="pen-tool"></i></div>
+                            <h4>Premium Dark UI</h4>
+                            <p>Investigating spatial UI layout, dynamic lighting styles, variable letter-spacing, and micro-physics animations that drive high retention.</p>
+                        </div>
+
+                        <!-- Explore 5: Business Systems -->
+                        <div class="bento-card explore-card spotlight-card">
+                            <div class="explore-glow"></div>
+                            <div class="explore-icon-box"><i data-lucide="network"></i></div>
+                            <h4>Tech to Revenue Systems</h4>
+                            <p>Mapping software code directly to operational leverage. Designing architectures that reduce server costs while facilitating scalability.</p>
+                        </div>
+
+                        <!-- Explore 6: Startup Engineering -->
+                        <div class="bento-card explore-card spotlight-card">
+                            <div class="explore-glow"></div>
+                            <div class="explore-icon-box"><i data-lucide="trending-up"></i></div>
+                            <h4>Velocity Over Perfection</h4>
+                            <p>Optimizing developer tools, scaffolding setups, and modern frameworks to ship robust MVPs in days rather than months.</p>
+                        </div>
                     </div>
 
-                    <!-- Explore 2: SaaS Platforms -->
-                    <div class="bento-card explore-card spotlight-card">
-                        <div class="explore-glow"></div>
-                        <div class="explore-icon-box"><i data-lucide="layers"></i></div>
-                        <h4>Scalable SaaS</h4>
-                        <p>Studying multi-tenant database designs, dynamic billing architectures, and high-conversion landing page heuristics for digital products.</p>
-                    </div>
+                    <!-- View 2: Knowledge Roadmap (Hidden initially) -->
+                    <div class="exploring-roadmap-view" id="explore-view-roadmap" style="display: none;">
+                        <div class="roadmap-container">
+                            <div class="roadmap-line"></div>
+                            
+                            <div class="roadmap-node left">
+                                <div class="node-content spotlight-card">
+                                    <span class="node-date">Q2 2026 - Active</span>
+                                    <h4>Advanced Agentic RAG Nodes</h4>
+                                    <p>Constructing multi-agent nodes that collaborate using custom databases to autonomously solve workflows.</p>
+                                    <div class="node-meta">
+                                        <span class="meta-tag">LangGraph</span>
+                                        <span class="meta-tag">LlamaIndex</span>
+                                        <span class="meta-tag">GPT-4o</span>
+                                    </div>
+                                </div>
+                            </div>
 
-                    <!-- Explore 3: Automation Loops -->
-                    <div class="bento-card explore-card spotlight-card">
-                        <div class="explore-glow"></div>
-                        <div class="explore-icon-box"><i data-lucide="zap"></i></div>
-                        <h4>No-Code & Custom API Loops</h4>
-                        <p>Synthesizing webhooks, triggers, and automated logic bridges to bypass manual back-office tasks and save human hours.</p>
-                    </div>
+                            <div class="roadmap-node right">
+                                <div class="node-content spotlight-card">
+                                    <span class="node-date">Q3 2026</span>
+                                    <h4>Scalable SaaS Architecture</h4>
+                                    <p>Studying multi-tenant database designs, dynamic billing architectures, and landing page metrics.</p>
+                                    <div class="node-meta">
+                                        <span class="meta-tag">PostgreSQL</span>
+                                        <span class="meta-tag">Stripe Billing</span>
+                                        <span class="meta-tag">Next.js 15</span>
+                                    </div>
+                                </div>
+                            </div>
 
-                    <!-- Explore 4: Product Design -->
-                    <div class="bento-card explore-card spotlight-card">
-                        <div class="explore-glow"></div>
-                        <div class="explore-icon-box"><i data-lucide="pen-tool"></i></div>
-                        <h4>Premium Dark UI</h4>
-                        <p>Investigating spatial UI layout, dynamic lighting styles, variable letter-spacing, and micro-physics animations that drive high retention.</p>
-                    </div>
+                            <div class="roadmap-node left">
+                                <div class="node-content spotlight-card">
+                                    <span class="node-date">Q4 2026</span>
+                                    <h4>Custom API Loops</h4>
+                                    <p>Synthesizing webhooks, triggers, and automated logic bridges to bypass manual back-office tasks.</p>
+                                    <div class="node-meta">
+                                        <span class="meta-tag">Node.js</span>
+                                        <span class="meta-tag">FastAPI</span>
+                                        <span class="meta-tag">n8n</span>
+                                    </div>
+                                </div>
+                            </div>
 
-                    <!-- Explore 5: Business Systems -->
-                    <div class="bento-card explore-card spotlight-card">
-                        <div class="explore-glow"></div>
-                        <div class="explore-icon-box"><i data-lucide="network"></i></div>
-                        <h4>Tech to Revenue Systems</h4>
-                        <p>Mapping software code directly to operational leverage. Designing architectures that reduce server costs while facilitating scalability.</p>
-                    </div>
-
-                    <!-- Explore 6: Startup Engineering -->
-                    <div class="bento-card explore-card spotlight-card">
-                        <div class="explore-glow"></div>
-                        <div class="explore-icon-box"><i data-lucide="trending-up"></i></div>
-                        <h4>Velocity Over Perfection</h4>
-                        <p>Optimizing developer tools, scaffolding setups, and modern frameworks to ship robust MVPs in days rather than months.</p>
+                            <div class="roadmap-node right">
+                                <div class="node-content spotlight-card">
+                                    <span class="node-date">Q1 2027</span>
+                                    <h4>Startup Engineering & Velocity</h4>
+                                    <p>Optimizing developer tools, scaffolding setups, and modern frameworks to ship robust MVPs in days.</p>
+                                    <div class="node-meta">
+                                        <span class="meta-tag">Turborepo</span>
+                                        <span class="meta-tag">Next.js 16</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -389,9 +873,9 @@
         <section id="contact" class="contact-section">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-tag">Availability</span>
-                    <h2 class="section-title">Let's Build</h2>
-                    <p class="section-desc">Have a serious product idea, automation need, or software role? Get in touch to collaborate.</p>
+                    <span class="section-tag">Direct Line</span>
+                    <h2 class="section-title">Let's Build Something Meaningful</h2>
+                    <p class="section-desc">Have a serious product idea, automation need, or software role? Get in touch and let's construct it.</p>
                 </div>
 
                 <!-- Luxury Glassmorphic Contact Card -->
@@ -400,11 +884,17 @@
                         
                         <div class="contact-details-panel">
                             <div class="availability-badge">
-                                <span class="status-dot"></span>
+                                <span class="status-dot pulsed"></span>
                                 <span>Currently booking projects for Q3 2026</span>
                             </div>
+                            <div class="response-time-badge" style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--text-dim); margin-bottom: 2rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">
+                                <i data-lucide="clock" style="width: 14px; height: 14px; color: var(--accent-purple);"></i>
+                                <span>Expected Response: &lt; 12 Hours</span>
+                            </div>
                             <h3>Let's start the conversation.</h3>
-                            <p>I focus on building performant software and automated AI systems that deliver tangible value. Reach out and let me know what we are building.</p>
+                            <p class="personal-note" style="font-style: italic; border-left: 2px solid var(--accent-cyan); padding-left: 1rem; color: var(--text-secondary); margin-bottom: 2.5rem;">
+                                "I focus on building performant software and automated AI systems that deliver tangible value. Reach out and let me know what we are building. No fluff, just shipping code."
+                            </p>
                             
                             <div class="premium-channels">
                                 <a href="mailto:sahilsingone09@gmail.com" class="channel-item">
@@ -489,6 +979,52 @@
             </div>
         </div>
     </footer>
+
+    <!-- AI ASSISTANT FLOATING PANEL -->
+    <div class="ai-assistant-wrapper">
+        <!-- Chat Toggle Button -->
+        <button class="ai-chat-toggle" id="ai-chat-toggle">
+            <i data-lucide="bot" class="toggle-icon-bot" id="ai-toggle-icon-bot"></i>
+            <i data-lucide="x" class="toggle-icon-close" id="ai-toggle-icon-close" style="display: none;"></i>
+            <span class="pulse-ring"></span>
+        </button>
+
+        <!-- Glassmorphic Chat Panel -->
+        <div class="ai-chat-panel glass-panel" id="ai-chat-panel">
+            <div class="chat-header">
+                <div class="header-info">
+                    <span class="status-dot pulsed"></span>
+                    <div>
+                        <h5>Sahil's AI Agent</h5>
+                        <span class="status-text">Active & Online</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chat-body" id="chat-body">
+                <div class="chat-message bot">
+                    <p>Hi, I'm Sahil's AI agent. Ask me anything about his projects, skills, or availability!</p>
+                </div>
+            </div>
+
+            <!-- Quick Suggestions -->
+            <div class="chat-suggestions" id="chat-suggestions">
+                <button class="suggestion-btn" data-query="What is Sahil's core stack?">Core Stack</button>
+                <button class="suggestion-btn" data-query="Is he available for select contracts?">Availability</button>
+                <button class="suggestion-btn" data-query="Tell me about the TypeLabs architecture.">TypeLabs Spec</button>
+                <button class="suggestion-btn" data-query="How can I contact Sahil?">Contact Info</button>
+            </div>
+
+            <div class="chat-footer">
+                <form id="ai-chat-form" class="chat-input-form">
+                    <input type="text" id="ai-chat-input" placeholder="Ask about stack, projects, timeline..." autocomplete="off">
+                    <button type="submit" class="chat-send-btn">
+                        <i data-lucide="arrow-right"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
 
     
 </body>
