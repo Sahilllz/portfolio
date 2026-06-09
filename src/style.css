@@ -798,9 +798,16 @@ section {
 }
 
 .case-study-name {
-  font-size: clamp(2rem, 4vw, 2.5rem);
-  margin-bottom: 0.5rem;
-  color: var(--text-primary);
+  font-size: clamp(2.2rem, 4.5vw, 2.8rem);
+  margin-bottom: 0.75rem;
+  color: #ffffff;
+  text-shadow: 0 0 20px rgba(0, 242, 255, 0.25);
+  text-decoration: underline;
+  text-decoration-color: var(--accent-cyan);
+  text-underline-offset: 10px;
+  text-decoration-thickness: 3px;
+  display: inline-block;
+  width: fit-content;
 }
 
 .case-study-subtitle {
