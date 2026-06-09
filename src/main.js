@@ -20,7 +20,8 @@ import {
   Zap,
   PenTool,
   Network,
-  TrendingUp
+  TrendingUp,
+  Instagram
 } from 'lucide'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -46,7 +47,8 @@ const setupIcons = () => {
             Zap,
             PenTool,
             Network,
-            TrendingUp
+            TrendingUp,
+            Instagram
         }
     });
 }
