@@ -588,98 +588,6 @@ const setupTypingDemo = () => {
     initDemo();
 };
 
-// Skills detailed diagnostics & Exploring roadmap toggle
-const setupSkillsAndExploring = () => {
-    // 1. Skills Diagnostics Panel
-    const skillTags = document.querySelectorAll('.skill-tag');
-    const placeholder = document.getElementById('skill-panel-placeholder');
-    const dataContainer = document.getElementById('skill-panel-data');
-    const nameEl = document.getElementById('skill-detail-name');
-    const timelineEl = document.getElementById('skill-detail-timeline');
-    const percentEl = document.getElementById('skill-detail-percent');
-    const fillEl = document.getElementById('skill-detail-fill');
-    const projectsEl = document.getElementById('skill-detail-projects');
-
-    skillTags.forEach(tag => {
-        tag.addEventListener('click', () => {
-            const name = tag.querySelector('span').innerText;
-            const proficiency = tag.getAttribute('data-proficiency') || '80%';
-            const timeline = tag.getAttribute('data-timeline') || '2+ Years';
-            const projects = tag.getAttribute('data-projects') || '';
-
-            if (placeholder) placeholder.style.display = 'none';
-            if (dataContainer) dataContainer.style.display = 'block';
-
-            nameEl.innerText = name;
-            timelineEl.innerText = timeline;
-            percentEl.innerText = proficiency;
-            fillEl.style.width = '0%';
-
-            setTimeout(() => {
-                fillEl.style.width = proficiency;
-            }, 50);
-
-            projectsEl.innerHTML = '';
-            if (projects) {
-                const projList = projects.split(',');
-                projList.forEach(proj => {
-                    const badge = document.createElement('a');
-                    badge.href = `#projects`;
-                    badge.className = 'project-link-badge';
-                    badge.innerText = proj;
-                    badge.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        const targetProj = document.getElementById('projects');
-                        if (targetProj) targetProj.scrollIntoView({ behavior: 'smooth' });
-                    });
-                    projectsEl.appendChild(badge);
-                });
-            } else {
-                projectsEl.innerHTML = '<span style="color: var(--text-dim); font-size: 0.85rem;">No public builds associated yet</span>';
-            }
-        });
-    });
-
-    // 2. Exploring Toggle View
-    const btnGrid = document.getElementById('btn-explore-grid');
-    const btnRoadmap = document.getElementById('btn-explore-roadmap');
-    const viewGrid = document.getElementById('explore-view-grid');
-    const viewRoadmap = document.getElementById('explore-view-roadmap');
-
-    if (btnGrid && btnRoadmap && viewGrid && viewRoadmap) {
-        btnGrid.addEventListener('click', () => {
-            btnGrid.classList.add('active');
-            btnRoadmap.classList.remove('active');
-            
-            viewRoadmap.style.display = 'none';
-            viewGrid.style.display = 'grid';
-            
-            gsap.from(viewGrid.querySelectorAll('.explore-card'), {
-                opacity: 0,
-                y: 15,
-                duration: 0.5,
-                stagger: 0.08,
-                ease: 'power2.out'
-            });
-        });
-
-        btnRoadmap.addEventListener('click', () => {
-            btnRoadmap.classList.add('active');
-            btnGrid.classList.remove('active');
-            
-            viewGrid.style.display = 'none';
-            viewRoadmap.style.display = 'block';
-
-            gsap.from(viewRoadmap.querySelectorAll('.roadmap-node'), {
-                opacity: 0,
-                x: (i, el) => el.classList.contains('left') ? -30 : 30,
-                duration: 0.6,
-                stagger: 0.1,
-                ease: 'power2.out'
-            });
-        });
-    }
-}
 
 // Floating Q&A AI Assistant chatbot engine
 const setupAIAssistant = () => {
@@ -825,7 +733,6 @@ window.addEventListener('DOMContentLoaded', () => {
     setupAnimations();
     setupDiagnostics();
     setupTypingDemo();
-    setupSkillsAndExploring();
     setupAIAssistant();
     setupForm();
 });
