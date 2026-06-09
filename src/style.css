@@ -335,10 +335,12 @@ section {
 
 /* RESTORED HERO SECTION (Original style rules) */
 .hero {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
-  align-items: center;
-  padding-top: 80px;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 130px;
+  padding-bottom: 40px;
 }
 
 .hero-grid {
