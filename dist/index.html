@@ -8,8 +8,8 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <script type="module" crossorigin src="/assets/index-8c235718.js"></script>
-  <link rel="stylesheet" href="/assets/index-4f20049a.css">
+  <script type="module" crossorigin src="/assets/index-a3ae100e.js"></script>
+  <link rel="stylesheet" href="/assets/index-53e06da7.css">
 </head>
 <body>
     <!-- Scroll Progress Bar -->
@@ -41,6 +41,19 @@
     <div class="cursor-dot"></div>
     <div class="cursor-ring"></div>
 
+    <!-- Mobile Nav Overlay -->
+    <div class="mobile-nav-overlay" id="mobile-nav-overlay">
+        <ul class="mobile-nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Case Studies</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#exploring">Exploring</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#contact" class="btn btn-nav mobile-cta">Hire Builder</a></li>
+        </ul>
+    </div>
+
     <!-- Floating Pill Navigation -->
     <header class="nav-wrapper">
         <nav id="navbar" class="floating-nav">
@@ -60,6 +73,12 @@
                 <div class="nav-cta">
                     <a href="#contact" class="btn btn-nav">Hire Builder</a>
                 </div>
+                <!-- Premium Hamburger Menu Toggle -->
+                <button class="menu-toggle" id="menu-toggle" aria-label="Toggle Menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
             </div>
         </nav>
     </header>
@@ -122,7 +141,7 @@
                 <div class="about-grid-premium">
                     <div class="about-visual">
                         <div class="about-img-wrapper">
-                            <img src="/images/profile_about.jpg" alt="About Sahil">
+                            <img src="/images/profile_about.jpg" alt="About Sahil" loading="lazy">
                         </div>
                     </div>
                     <div class="about-content-premium">
@@ -172,7 +191,7 @@
                     <div class="case-study-item">
                         <div class="case-study-media">
                             <div class="case-study-glow"></div>
-                            <img src="/images/typelabs.png" alt="TypeLabs Mockup" class="case-study-img">
+                            <img src="/images/typelabs.png" alt="TypeLabs Mockup" class="case-study-img" loading="lazy">
                         </div>
                         <div class="case-study-content">
                             <h3 class="case-study-name">TypeLabs</h3>
@@ -321,7 +340,7 @@
                     <div class="case-study-item reverse">
                         <div class="case-study-media">
                             <div class="case-study-glow"></div>
-                            <img src="/images/gitcommitter.png" alt="GitCommitter Mockup" class="case-study-img">
+                            <img src="/images/gitcommitter.png" alt="GitCommitter Mockup" class="case-study-img" loading="lazy">
                         </div>
                         <div class="case-study-content">
                             <h3 class="case-study-name">GitCommitter</h3>

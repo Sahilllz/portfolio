@@ -145,6 +145,37 @@ const setupNavbar = () => {
         
         lastScrollY = currentScrollY;
     });
+
+    // Mobile Hamburger Toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileOverlay = document.getElementById('mobile-nav-overlay');
+    
+    if (menuToggle && mobileOverlay) {
+        const overlayLinks = mobileOverlay.querySelectorAll('a');
+
+        const toggleMenu = () => {
+            const isActive = menuToggle.classList.contains('active');
+            if (isActive) {
+                menuToggle.classList.remove('active');
+                mobileOverlay.classList.remove('active');
+                document.body.style.overflow = ''; // enable scroll
+            } else {
+                menuToggle.classList.add('active');
+                mobileOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // disable scroll
+            }
+        };
+
+        menuToggle.addEventListener('click', toggleMenu);
+
+        overlayLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                mobileOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+    }
 }
 
 // Custom Cursor (Precise dot + Smooth Ring Lerp)
@@ -215,6 +246,9 @@ const setupCursor = () => {
 
 // Spotlight Interaction Tracking (Local radial lighting + 3D depth tilt)
 const setupSpotlights = () => {
+    // Only set up spotlights and 3D tilts if hover is supported (pointer: fine)
+    if (!window.matchMedia("(pointer: fine)").matches) return;
+
     const cards = document.querySelectorAll('.spotlight-card');
     cards.forEach(card => {
         card.addEventListener('mousemove', (e) => {
