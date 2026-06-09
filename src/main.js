@@ -598,9 +598,12 @@ const setupAIAssistant = () => {
     const chatBody = document.getElementById('chat-body');
     const chatForm = document.getElementById('ai-chat-form');
     const chatInput = document.getElementById('ai-chat-input');
-    const suggestions = document.querySelectorAll('.suggestion-btn');
+    const suggestionsContainer = document.getElementById('chat-suggestions');
 
     if (!toggleBtn || !chatPanel || !chatBody) return;
+
+    let currentContext = null;
+    let sessionHistory = [];
 
     toggleBtn.addEventListener('click', () => {
         const isActive = chatPanel.classList.contains('active');
@@ -616,41 +619,260 @@ const setupAIAssistant = () => {
         }
     });
 
-    const qaPairs = [
-        {
-            keywords: ['stack', 'tech', 'skills', 'languages', 'technologies', 'frameworks'],
-            response: "Sahil's primary stack is **React, Node.js, JavaScript, and HTML/CSS** for front-end, and **Python / C++** for systems and automation. He also utilizes tools like Figma, Git/GitHub, and VS Code, and builds advanced custom AI pipelines."
-        },
-        {
-            keywords: ['available', 'hire', 'contract', 'freelance', 'job', 'work', 'booking'],
-            response: "Sahil is currently **available** for select software engineering roles and Q3 2026 contract work. His typical response time is under 12 hours!"
-        },
-        {
-            keywords: ['typelabs', 'typing', 'diagnostics', 'telemetry'],
-            response: "TypeLabs is a high-fidelity typing engine designed with strict state isolation and hardware-accelerated GSAP visuals. It records keystroke latency with millisecond-accuracy and displays diagnostic heatmaps. You can test it live in the Showcase section above!"
-        },
-        {
-            keywords: ['gitcommitter', 'cli', 'hook', 'git'],
-            response: "GitCommitter is a lightweight Node.js terminal app that automates Conventional Commit formatting. It integrates directly into local workspace git-hooks, parsing diffs and accelerating repository commit loops by roughly 40%."
-        },
-        {
-            keywords: ['contact', 'email', 'linkedin', 'github', 'message', 'reach'],
-            response: "You can email Sahil directly at **sahilsingone09@gmail.com**, connect on LinkedIn at **linkedin.com/in/sahil-singone**, or review his builds on GitHub at **github.com/Sahilllz**."
-        },
-        {
-            keywords: ['who', 'about', 'sahil', 'philosophy'],
-            response: "Sahil is a serious product builder and developer who focuses on turning complex business ideas into high-performance software, automated workflows, and robust AI integrations. He values velocity, system leverage, and clean UX."
-        }
-    ];
+    const suggestionsMap = {
+        typelabs: [
+            { label: "Technologies Used?", query: "What technologies were used in TypeLabs?" },
+            { label: "Why did he build it?", query: "Why did Sahil build TypeLabs?" },
+            { label: "Can I try it live?", query: "Can I run the TypeLabs sandbox?" },
+            { label: "Show other projects", query: "Show me featured projects" }
+        ],
+        gitcommitter: [
+            { label: "Technologies Used?", query: "What technologies were used in GitCommitter?" },
+            { label: "Why did he build it?", query: "Why did Sahil build GitCommitter?" },
+            { label: "How to run it?", query: "How can I run GitCommitter?" },
+            { label: "Show other projects", query: "Show me featured projects" }
+        ],
+        skills: [
+            { label: "Learning Focus", query: "What is Sahil currently learning?" },
+            { label: "Capabilities", query: "What kind of software can Sahil build?" },
+            { label: "TypeLabs Project", query: "Tell me about TypeLabs" },
+            { label: "Contact Info", query: "How can I contact Sahil?" }
+        ],
+        learning: [
+            { label: "Future Ambitions", query: "What are Sahil's future ambitions?" },
+            { label: "Capabilities", query: "What kind of software can Sahil build?" },
+            { label: "TypeLabs Project", query: "Tell me about TypeLabs" },
+            { label: "Availability", query: "Is he available for hire?" }
+        ],
+        availability: [
+            { label: "Contact Info", query: "How can I contact Sahil?" },
+            { label: "Capabilities", query: "What kind of software can Sahil build?" },
+            { label: "Featured Projects", query: "Show me featured projects" }
+        ],
+        contact: [
+            { label: "Availability", query: "Is he available for select contracts?" },
+            { label: "Featured Projects", query: "Show me featured projects" },
+            { label: "Who is Sahil?", query: "Tell me about Sahil" }
+        ],
+        sahil: [
+            { label: "TypeLabs Project", query: "Tell me about TypeLabs" },
+            { label: "Tech Stack", query: "What technologies does Sahil use?" },
+            { label: "Learning Focus", query: "What is Sahil currently learning?" },
+            { label: "Contact Info", query: "How can I contact Sahil?" }
+        ],
+        default: [
+            { label: "TypeLabs Project", query: "Tell me about TypeLabs" },
+            { label: "Tech Stack", query: "What technologies does Sahil use?" },
+            { label: "Learning Focus", query: "What is Sahil currently learning?" },
+            { label: "Featured Projects", query: "Show me featured projects" },
+            { label: "Capabilities", query: "What kind of software can Sahil build?" }
+        ]
+    };
+
+    const renderSuggestions = (contextKey) => {
+        if (!suggestionsContainer) return;
+        const key = contextKey || 'default';
+        const list = suggestionsMap[key] || suggestionsMap['default'];
+        suggestionsContainer.innerHTML = '';
+        list.forEach(item => {
+            const btn = document.createElement('button');
+            btn.className = 'suggestion-btn';
+            btn.setAttribute('data-query', item.query);
+            btn.innerText = item.label;
+            btn.addEventListener('click', () => {
+                appendMessage('user', item.query);
+                handleBotResponse(item.query);
+            });
+            suggestionsContainer.appendChild(btn);
+        });
+    };
 
     const generateResponse = (userMsg) => {
         const msg = userMsg.toLowerCase().trim();
-        for (const pair of qaPairs) {
-            if (pair.keywords.some(keyword => msg.includes(keyword))) {
-                return pair.response;
+
+        // 1. GREETINGS
+        if (/\b(hi|hello|hey|hlw|yo|sup|greetings|howdy|hiya)\b/i.test(msg)) {
+            if (/\bhi\b/i.test(msg)) {
+                return "Hey! Welcome to Sahil's portfolio. Feel free to ask me about his projects, skills, experience, or what he's currently building.";
+            }
+            if (/\bhello\b/i.test(msg)) {
+                return "Hello! I'm Sahil's AI assistant. What would you like to know?";
+            }
+            if (/\bhey\b/i.test(msg)) {
+                return "Hey there! How can I help you today?";
+            }
+            if (/\bhlw\b/i.test(msg)) {
+                return "Hello! Glad you're here. What would you like to explore?";
+            }
+            const greetingVariations = [
+                "Hey there! How can I help you explore Sahil's work today?",
+                "Hello! Welcome. What would you like to know about Sahil?",
+                "Hey! Glad you're visiting. Ask me anything about Sahil's experience or projects!"
+            ];
+            return greetingVariations[Math.floor(Math.random() * greetingVariations.length)];
+        }
+
+        // 2. GOODBYES
+        if (/\b(bye|goodbye|see you|see ya|cya|adios|farewell|exit|quit)\b/i.test(msg)) {
+            const goodbyeVariations = [
+                "Goodbye! Have a great day!",
+                "See you! Let me know if you need anything else.",
+                "Bye! Thanks for stopping by."
+            ];
+            return goodbyeVariations[Math.floor(Math.random() * goodbyeVariations.length)];
+        }
+
+        // 3. COMPLIMENTS
+        if (/\b(nice|awesome|cool|great|amazing|love|like)\b/i.test(msg) && /\b(portfolio|site|website|design|work|page)\b/i.test(msg)) {
+            const complimentVariations = [
+                "Thank you! Sahil put a lot of effort into building it.",
+                "Glad you like it! Feel free to explore the projects.",
+                "Appreciate it. Let me know if you'd like to know more about any project."
+            ];
+            return complimentVariations[Math.floor(Math.random() * complimentVariations.length)];
+        }
+
+        // 4. THANKS
+        if (/\b(thanks|thank you|thx|appreciate it|grateful|tanks)\b/i.test(msg)) {
+            const thanksVariations = [
+                "You're very welcome! Let me know if you have other questions.",
+                "Happy to help! Feel free to ask anything else.",
+                "Anytime! Always here to assist."
+            ];
+            return thanksVariations[Math.floor(Math.random() * thanksVariations.length)];
+        }
+
+        // 5. SMALL TALK
+        if (/\bhow are you\b/i.test(msg) || /\bhow's it going\b/i.test(msg) || /\bhow are you doing\b/i.test(msg)) {
+            return "I'm doing great and ready to help you explore Sahil's work. What would you like to know?";
+        }
+        if (/\bwhat's up\b/i.test(msg) || /\bwhats up\b/i.test(msg) || /\bwhat is up\b/i.test(msg)) {
+            return "Not much, just helping visitors learn more about Sahil's projects and journey.";
+        }
+        if (/\bwho are you\b/i.test(msg) || /\bwhat are you\b/i.test(msg)) {
+            return "I'm an AI assistant designed to answer questions about Sahil, his projects, skills, and interests.";
+        }
+        if (msg.includes('what do you do') || msg.includes('what is your role') || msg.includes('what are you for')) {
+            return "I'm Sahil's conversational AI assistant. I can introduce you to Sahil, walk you through his projects (like TypeLabs or GitCommitter), detail his technical stack, explain what he's currently building, or help you contact him.";
+        }
+
+        // Update context if explicit keywords are present
+        if (msg.includes('typelabs')) {
+            currentContext = 'typelabs';
+        } else if (msg.includes('gitcommitter')) {
+            currentContext = 'gitcommitter';
+        } else if (msg.includes('contact') || msg.includes('reach') || msg.includes('email') || msg.includes('message') || msg.includes('linkedin') || msg.includes('github')) {
+            currentContext = 'contact';
+        } else if (msg.includes('stack') || msg.includes('tech') || msg.includes('skill') || msg.includes('languages') || msg.includes('frameworks') || msg.includes('technologies')) {
+            currentContext = 'skills';
+        } else if (msg.includes('available') || msg.includes('hire') || msg.includes('contract') || msg.includes('job') || msg.includes('work')) {
+            currentContext = 'availability';
+        } else if (msg.includes('learning') || msg.includes('goals') || msg.includes('future') || msg.includes('study') || msg.includes('studying') || msg.includes('ambition')) {
+            currentContext = 'learning';
+        } else if (msg.includes('sahil') || msg.includes('about him') || msg.includes('who is')) {
+            currentContext = 'sahil';
+        }
+
+        // 6. CONTEXT-AWARE FOLLOW-UP QUESTIONS
+        // A. Technologies used
+        if (/\b(technologies|tech|stack|languages|frameworks|tools|built with|developed with|use)\b/i.test(msg)) {
+            if (currentContext === 'typelabs') {
+                return "TypeLabs was built using **React, Vanilla JavaScript, CSS, and hardware-accelerated GSAP** for animations. It features strict state isolation to keep the typing sandbox run loop fully isolated and high-performance.";
+            }
+            if (currentContext === 'gitcommitter') {
+                return "GitCommitter is a lightweight CLI tool written in **Node.js and JavaScript** that interacts with git hooks to parse diffs and format commits.";
+            }
+            if (currentContext === 'skills' || currentContext === 'sahil') {
+                return "Sahil's primary stack is **React, Node.js, JavaScript, and HTML/CSS** for front-end, and **Python / C++** for systems and automation.";
             }
         }
-        return "I'm not fully sure about that detail. You can ask about Sahil's **tech stack**, **availability**, **TypeLabs project**, or **how to contact him**!";
+
+        // B. Motivation / Purpose
+        if (/\b(why|purpose|motivation|reason|what does it do|explain it)\b/i.test(msg)) {
+            if (currentContext === 'typelabs') {
+                return "Sahil built TypeLabs to construct a high-performance typing sandbox that measures typing telemetry latency (keystroke press/release offsets) at a millisecond level to identify typing bottlenecks.";
+            }
+            if (currentContext === 'gitcommitter') {
+                return "Sahil built GitCommitter to streamline his own development workflow, automating Conventional Commit formatting directly in local git hooks to ensure clean commit histories.";
+            }
+            if (currentContext === 'sahil') {
+                return "Sahil focuses on building performant software and automated AI systems that deliver tangible value—no fluff, just shipping code.";
+            }
+        }
+
+        // C. Live link / Run it
+        if (/\b(live|run|try|play|link|accessible|online|where is)\b/i.test(msg)) {
+            if (currentContext === 'typelabs') {
+                return "Yes! You can run the TypeLabs sandbox demo live right here on this portfolio! Scroll up to the featured showcase section and start typing to see your telemetry latency heatmap.";
+            }
+            if (currentContext === 'gitcommitter') {
+                return "GitCommitter is a terminal CLI tool. You can find the codebase and integration instructions on Sahil's GitHub repository at **github.com/Sahilllz**!";
+            }
+        }
+
+        // 7. SPECIFIC PORTFOLIO KNOWLEDGE MATCHES
+        // A. General Intro
+        if (/\b(who is sahil|about sahil|tell me about yourself|introduce yourself|who are you|introduce sahil)\b/i.test(msg)) {
+            return "Sahil is a software engineer and product builder focusing on high-performance digital products, systems, and custom AI experiences. I can tell you about his projects, technical skills, current learning focus, and future ambitions.";
+        }
+
+        // B. Projects list
+        if (/\b(projects|builds|what has he built|featured projects|portfolio projects)\b/i.test(msg)) {
+            return "Sahil has built some cool projects! Two key ones are **TypeLabs** (a high-fidelity typing engine and sandbox) and **GitCommitter** (a Node.js CLI tool for git-hooks). Which one would you like to learn more about?";
+        }
+
+        // C. Specific TypeLabs
+        if (msg.includes('typelabs')) {
+            return "TypeLabs is a high-fidelity typing engine designed with strict state isolation and hardware-accelerated GSAP visuals. It records keystroke latency with millisecond-accuracy and displays diagnostic heatmaps. You can test it live in the Showcase section above!";
+        }
+
+        // D. Specific GitCommitter
+        if (msg.includes('gitcommitter')) {
+            return "GitCommitter is a lightweight Node.js terminal app that automates Conventional Commit formatting. It integrates directly into local workspace git-hooks, parsing diffs and accelerating repository commit loops by roughly 40%.";
+        }
+
+        // E. Skills & Stack
+        if (/\b(skills|stack|tech|technologies|languages|frameworks|tools)\b/i.test(msg)) {
+            return "Sahil's primary stack is **React, Node.js, JavaScript, and HTML/CSS** for front-end, and **Python / C++** for systems and automation. He also utilizes tools like Figma, Git/GitHub, and VS Code.";
+        }
+
+        // F. Experience
+        if (/\b(experience|history|background|work history|how long)\b/i.test(msg)) {
+            return "Sahil has over **4+ years of web development experience** building interactive front-ends, custom backends, and command line tools. He has shipped over 10+ projects.";
+        }
+
+        // G. Education
+        if (/\b(education|college|degree|study|studied|school|university)\b/i.test(msg)) {
+            return "Sahil is largely a self-driven engineer and an AI/ML aspirant. He focuses on hands-on construction, building real-world systems, and reading deep technical documentation rather than traditional credentials.";
+        }
+
+        // H. Contact Info
+        if (/\b(contact|reach|email|linkedin|github|message|phone)\b/i.test(msg)) {
+            return "You can email Sahil directly at **sahilsingone09@gmail.com**, connect on LinkedIn at **linkedin.com/in/sahil-singone**, or review his builds on GitHub at **github.com/Sahilllz**.";
+        }
+
+        // I. Availability
+        if (/\b(available|availability|hire|contract|job|freelance)\b/i.test(msg)) {
+            return "Sahil is currently **available** for select software engineering roles and Q3 2026 contract work. His response time is usually under 12 hours!";
+        }
+
+        // J. Learning focus
+        if (/\b(learning|goals|study|studying|roadmap)\b/i.test(msg)) {
+            return "Sahil is currently diving deep into **Advanced Agentic RAG Nodes (using LangGraph/LlamaIndex)**, multi-tenant SaaS architecture design, custom API loops, and scaling digital products.";
+        }
+
+        // K. Ambitions
+        if (/\b(ambition|ambitions|future|goals|plans)\b/i.test(msg)) {
+            return "Sahil's ambition is to build scalable SaaS products, construct cost-reducing multi-agent AI systems for businesses, and design immersive premium spatial user interfaces.";
+        }
+
+        // L. Capabilities
+        if (/\b(kind of software|what can he build|capabilities|software can sahil build)\b/i.test(msg)) {
+            return "Sahil builds high-performance web applications (like React-based interactive dashboards), command-line productivity tools, automated API logic loops (webhook integrations, back-office bots), and custom AI pipelines (like RAG agents).";
+        }
+
+        // 8. FALLBACK
+        return "I'm not sure about that, but I can help with questions about Sahil's projects, skills, experience, and work.";
     };
 
     const appendMessage = (sender, text) => {
@@ -659,6 +881,10 @@ const setupAIAssistant = () => {
         msgBubble.innerHTML = `<p>${text}</p>`;
         chatBody.appendChild(msgBubble);
         chatBody.scrollTop = chatBody.scrollHeight;
+
+        // Remember in session history
+        sessionHistory.push({ sender, text });
+        if (sessionHistory.length > 10) sessionHistory.shift();
     };
 
     const handleBotResponse = (userMsg) => {
@@ -672,16 +898,13 @@ const setupAIAssistant = () => {
             indicator.remove();
             const reply = generateResponse(userMsg);
             appendMessage('bot', reply);
+            // Render new suggestions based on detected context
+            renderSuggestions(currentContext || 'default');
         }, 800 + Math.random() * 600);
     };
 
-    suggestions.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const query = btn.getAttribute('data-query');
-            appendMessage('user', query);
-            handleBotResponse(query);
-        });
-    });
+    // Render initial suggested questions on load
+    renderSuggestions('default');
 
     chatForm.addEventListener('submit', (e) => {
         e.preventDefault();
