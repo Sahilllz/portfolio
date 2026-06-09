@@ -773,6 +773,26 @@ const setupAIAssistant = () => {
             currentContext = 'sahil';
         }
 
+        // 5.5 TRUST, CAPABILITY, & ABILITY QUESTIONS
+        // A. Handling Trust Questions
+        if (/\b(why should i hire|why hire|why should i work|why work with)\b/i.test(msg)) {
+            return "Visitors often evaluate developers based on project quality, technical skills, communication, and problem-solving ability. This portfolio highlights Sahil's work, technical stack, and product-building approach so you can assess whether his experience aligns with your needs.";
+        }
+
+        // B. Handling Hiring/Capability Questions
+        if (/\b(can sahil build|can he build|can you build)\b/i.test(msg) && /\b(idea|project|app|website|software|solution)\b/i.test(msg)) {
+            return "That depends on the complexity of the project, but based on the technologies and projects featured in this portfolio, Sahil has experience with web development, AI integrations, automation systems, and product development.";
+        }
+
+        // C. Handling Ability & Reliability Questions
+        if (/\b(good at his job|good job|good developer|is he good|is he experienced|is sahil experienced|should i hire|should i hire him|is he reliable|is sahil reliable)\b/i.test(msg) || (/\b(reliable|good|experienced)\b/i.test(msg) && /\b(sahil|he|developer)\b/i.test(msg))) {
+            const abilityVariations = [
+                "Sahil's portfolio demonstrates strong skills in full-stack development, AI automation, and product building. His projects showcase practical implementation, problem-solving ability, and attention to user experience. Whether he's the right fit depends on your project's requirements, but his work reflects a solid technical foundation and a strong builder mindset.",
+                "Based on the projects showcased here, Sahil appears comfortable building modern web applications, AI-powered solutions, and custom software products. The best way to evaluate fit would be to review his projects and discuss your specific requirements."
+            ];
+            return abilityVariations[Math.floor(Math.random() * abilityVariations.length)];
+        }
+
         // 6. CONTEXT-AWARE FOLLOW-UP QUESTIONS
         // A. Technologies used
         if (/\b(technologies|tech|stack|languages|frameworks|tools|built with|developed with|use)\b/i.test(msg)) {
