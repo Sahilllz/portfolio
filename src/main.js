@@ -122,7 +122,7 @@ const setupCursor = () => {
     render();
 
     // Hover state animations on interactive items
-    const hoverTargets = document.querySelectorAll('a, button, input, textarea, .bento-card, .channel-item');
+    const hoverTargets = document.querySelectorAll('a, button, input, textarea, .explore-card, .channel-item, .skill-tag, .premium-badge');
     hoverTargets.forEach(target => {
         target.addEventListener('mouseenter', () => {
             document.body.classList.add('cursor-hover');
@@ -150,48 +150,46 @@ const setupSpotlights = () => {
 
 // GSAP Scroll Animations
 const setupAnimations = () => {
-    // Hero Section Entrance Timeline
+    // Hero Section Entrance Timeline (Restored to target original elements)
     const heroTl = gsap.timeline();
     
-    heroTl.from('.hero-tag', { 
+    heroTl.from('.hero-content h3', { 
         opacity: 0, 
-        y: 20, 
-        duration: 0.8, 
-        ease: 'power3.out' 
-    })
-    .from('.hero-headline', { 
-        opacity: 0, 
-        y: 40, 
-        duration: 1.2, 
-        ease: 'power4.out' 
-    }, '-=0.6')
-    .from('.hero-subtext', { 
-        opacity: 0, 
-        y: 20, 
+        y: 30, 
         duration: 1, 
-        ease: 'power3.out' 
-    }, '-=0.8')
-    .from('.hero-ctas', { 
+        ease: 'power4.out' 
+    })
+    .from('.hero-content h2', { 
         opacity: 0, 
-        y: 15, 
-        duration: 0.8, 
-        ease: 'power3.out' 
+        y: 30, 
+        duration: 1, 
+        ease: 'power4.out' 
     }, '-=0.8')
-    .from('.profile-card', { 
+    .from('.hero-content p', { 
         opacity: 0, 
-        scale: 0.96, 
-        rotationX: 12,
-        rotationY: -6,
+        y: 30, 
+        duration: 1, 
+        ease: 'power4.out' 
+    }, '-=0.8')
+    .from('.btn-group', { 
+        opacity: 0, 
+        y: 30, 
+        duration: 1, 
+        ease: 'power4.out' 
+    }, '-=0.8')
+    .from('.hero-image-container', { 
+        opacity: 0, 
+        scale: 0.9, 
         duration: 1.5, 
         ease: 'expo.out' 
-    }, '-=0.8');
+    }, '-=1');
 
     // Section Content Entrance Reveal trigger loops
     gsap.utils.toArray('section').forEach(section => {
         if (section.id === 'home') return; // Skip hero since it's already animated on load
         
-        const header = section.querySelector('.section-header');
-        const contents = section.querySelectorAll('.journey-grid, .case-study-item, .skills-bento-grid, .exploring-bento-grid, .luxury-contact-card');
+        const header = section.querySelector('.section-header, .section-header-left');
+        const contents = section.querySelectorAll('.about-grid-premium, .skills-grid-premium, .case-study-item, .exploring-bento-grid, .luxury-contact-card');
         
         const timeline = gsap.timeline({
             scrollTrigger: {
